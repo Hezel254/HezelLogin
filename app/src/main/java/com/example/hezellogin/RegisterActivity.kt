@@ -7,12 +7,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.hezellogin.helper.DbHelper
+import com.example.hezellogin.model.Details
 
 class RegisterActivity : AppCompatActivity() {
 
     lateinit var editTextEmail: EditText
     lateinit var editTextPassword: EditText
     lateinit var editTextCPassword: EditText
+    lateinit var dbHandler:DbHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +25,9 @@ class RegisterActivity : AppCompatActivity() {
         editTextCPassword = findViewById<EditText>(R.id.editTextCPassword)
         val buttonLogin = findViewById<Button>(R.id.buttonLogin)
         val buttonRegister = findViewById<Button>(R.id.buttonRegister)
+
+        dbHandler = DbHelper(this, null)
+
 
         buttonLogin.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
@@ -70,6 +76,8 @@ class RegisterActivity : AppCompatActivity() {
             editTextCPassword.setError("Invalid password")
         }else{
             //register
+            val user = Details(email,pass)
+            dbHandler.insertData(user)
            Toast.makeText(this,"Register success",Toast.LENGTH_LONG).show()
         }
     }
