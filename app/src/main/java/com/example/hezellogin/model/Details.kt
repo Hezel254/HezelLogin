@@ -7,7 +7,5 @@ class Details {
         this.email = email
         this.password = password
     }
-//    constructor(userName: String) {
-//        this.userName = userName
-//    }
+
 }

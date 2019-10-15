@@ -2,6 +2,7 @@ package com.example.hezellogin.helper
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.hezellogin.model.Details
@@ -32,5 +33,9 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
+    fun readData(details:Details):Cursor{
+        val db=this.readableDatabase
+      return db.rawQuery("SELECT * FROM login WHERE email=? AND password=?", arrayOf(details.email,details.password))
+    }
 
 }

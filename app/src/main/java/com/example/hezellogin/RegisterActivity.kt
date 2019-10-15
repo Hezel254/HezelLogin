@@ -69,8 +69,6 @@ class RegisterActivity : AppCompatActivity() {
             editTextEmail.setError("Invalid email")
         }else if (!verifyPassword(pass)){
             Toast.makeText(this,"Check your password length",Toast.LENGTH_LONG).show()
-//            editTextPassword.requestFocus()
-//            editTextPassword.setError("Invalid password")
         }else if (!passMatch(pass,cPass)){
             editTextCPassword.requestFocus()
             editTextCPassword.setError("Invalid password")
