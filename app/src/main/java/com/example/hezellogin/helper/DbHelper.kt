@@ -50,15 +50,6 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-//    fun edittask(task: Task) {
-//        val tasks = ContentValues()
-//        tasks.put("name", task.name)
-//        tasks.put("description", task.description)
-//        val db = this.writableDatabase
-//        db.update("task", tasks,"id", arrayOf(task.id.toString()))
-//        db.close()
-//    }
-
     fun editTask(id: String, name: String,description:String) {
         val database = writableDatabase
 
@@ -85,8 +76,6 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         statement.close()
         database.close()
     }
-
-
 
     fun readData(details:Details):Cursor{
         val db=this.readableDatabase

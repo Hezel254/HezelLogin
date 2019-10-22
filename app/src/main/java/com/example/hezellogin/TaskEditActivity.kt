@@ -1,5 +1,6 @@
 package com.example.hezellogin
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -30,9 +31,9 @@ class TaskEditActivity : AppCompatActivity() {
         editTextDesc.setText(desc)
 
         buttonUpdate.setOnClickListener {
-//            val data =
-//                Task(id.toInt(), editTextName.text.toString(), editTextDesc.text.toString())
             dbHelper.editTask(id.toString(), editTextName.text.toString(), editTextDesc.text.toString())
+            startActivity(Intent(this,TaskActivity::class.java))
+            finish()
         }
 
     }
