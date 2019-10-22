@@ -19,8 +19,10 @@ class Task {
         this.date = date
     }
 
-    constructor(id: Int?) {
+    constructor(id: Int?, name: String?, description: String?) {
         this.id = id
+        this.name = name
+        this.description = description
     }
 
 
