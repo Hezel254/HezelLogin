@@ -30,9 +30,9 @@ class TaskEditActivity : AppCompatActivity() {
         editTextDesc.setText(desc)
 
         buttonUpdate.setOnClickListener {
-            val data =
-                Task(id.toInt(), editTextName.text.toString(), editTextDesc.text.toString())
-            dbHelper.edittask(data)
+//            val data =
+//                Task(id.toInt(), editTextName.text.toString(), editTextDesc.text.toString())
+            dbHelper.editTask(id.toString(), editTextName.text.toString(), editTextDesc.text.toString())
         }
 
     }

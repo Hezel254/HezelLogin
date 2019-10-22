@@ -1,5 +1,6 @@
 package com.example.hezellogin.helper
 
+import android.content.ClipDescription
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
@@ -49,20 +50,28 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-    fun edittask(task: Task) {
-        val tasks = ContentValues()
-        tasks.put("name", task.name)
-        tasks.put("description", task.description)
-        val db = this.writableDatabase
-        db.update("task", tasks,"id", arrayOf(task.id.toString()))
-        db.close()
-    }
-//
-//    fun deletetask(id: String) {
+//    fun edittask(task: Task) {
+//        val tasks = ContentValues()
+//        tasks.put("name", task.name)
+//        tasks.put("description", task.description)
 //        val db = this.writableDatabase
-//        db.delete("task", "id", id)
+//        db.update("task", tasks,"id", arrayOf(task.id.toString()))
 //        db.close()
 //    }
+
+    fun editTask(id: String, name: String,description:String) {
+        val database = writableDatabase
+
+        val sql = "UPDATE task SET name=?,description=? WHERE id=?"
+        val statement = database.compileStatement(sql)
+        statement.clearBindings()
+        statement.bindString(1, name)
+        statement.bindString(2, description)
+        statement.bindString(3, id)
+        statement.execute()
+        statement.close()
+        database.close()
+    }
 
     fun deletetask(id: String) {
         val database = writableDatabase
