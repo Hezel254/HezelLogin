@@ -100,29 +100,4 @@ class TaskActivity : AppCompatActivity() {
         }
     }
 
-
-    fun edittask(id:String,name:String,description: String) {
-        val dialogView = LayoutInflater.from(this).inflate(R.layout.add_task, null)
-        val builder = AlertDialog.Builder(this)
-            .setView(dialogView)
-            .setCancelable(false)
-        val alertDialog = builder.show()
-        dialogView.editTextName.setText(name)
-        dialogView.editTextDesc.setText(description)
-        dialogView.button_cancel.setOnClickListener {
-            alertDialog.dismiss()
-            alertDialog.cancel()
-        }
-        dialogView.button_save.setOnClickListener {
-            val data =
-                Task(id.toInt(),dialogView.editTextName.text.toString(), dialogView.editTextDesc.text.toString())
-            Log.d("DATA:",data.toString())
-            dbHelper.edittask(data)
-            alertDialog.dismiss()
-            alertDialog.cancel()
-            loadItems()
-        }
-    }
-
-
 }

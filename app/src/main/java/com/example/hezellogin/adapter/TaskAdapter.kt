@@ -1,11 +1,15 @@
 package com.example.hezellogin.adapter
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hezellogin.R
 import com.example.hezellogin.TaskActivity
+import com.example.hezellogin.TaskEditActivity
 import com.example.hezellogin.helper.DbHelper
 import com.example.hezellogin.holder.TaskHolder
 import com.example.hezellogin.model.Task
@@ -39,8 +43,8 @@ class TaskAdapter (protected var context: Context, private val task: ArrayList<T
             true
         }
         holder.cardViewTask.setOnClickListener{
-            //edit
-            taskAc.edittask(task[position].id.toString(),task[position].name.toString(),task[position].description.toString())
+            val intent = Intent(context, TaskEditActivity::class.java).putExtra("id",task[position].id.toString()).putExtra("name",task[position].name.toString()).putExtra("desc",task[position].description.toString())
+            context.startActivity(intent)
         }
     }
 
