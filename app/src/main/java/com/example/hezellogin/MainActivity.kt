@@ -66,6 +66,8 @@ class MainActivity : AppCompatActivity() {
             val cursor = dbHandler.readData(user)
             if(cursor.count>=1){
                 Toast.makeText(this, "Login success", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this,TaskActivity::class.java))
+                finish()
             }
             cursor.close()
         }
