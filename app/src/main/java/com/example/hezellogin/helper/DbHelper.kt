@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.hezellogin.model.Details
 import com.example.hezellogin.model.Task
 
@@ -13,7 +14,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_DETAILS_TABLE = ("CREATE TABLE " +
                  "login(id INTEGER PRIMARY KEY, email TEXT, password TEXT )")
-        val create_task_table=("create table task(id integer auto increment,name text,description text,date text)")
+        val create_task_table=("CREATE TABLE task(id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, description TEXT, date TEXT)")
         if (db != null) {
             db.execSQL(CREATE_DETAILS_TABLE)
             db.execSQL(create_task_table)
@@ -39,9 +40,10 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
 
     fun inserttask(task: Task){
         val tasks=ContentValues()
-        tasks.put("name","")
-        tasks.put("description","")
-        tasks.put("date","")
+        tasks.put("name",task.name)
+        tasks.put("description",task.description)
+        tasks.put("date",task.date)
+        Log.d("INSERT:",tasks.toString())
         val db=this.writableDatabase
         db.insert("task",null,tasks)
         db.close()
