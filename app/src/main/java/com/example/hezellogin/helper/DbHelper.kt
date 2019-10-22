@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.hezellogin.model.Details
+import com.example.hezellogin.model.Task
 
 class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, "details", factory, 1) {
@@ -36,7 +37,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-    fun inserttask(){
+    fun inserttask(task: Task){
         val tasks=ContentValues()
         tasks.put("name","")
         tasks.put("description","")
@@ -46,21 +47,18 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
     }
 
-    fun edittask() {
+    fun edittask(task: Task) {
         val tasks = ContentValues()
-        tasks.put("name", "")
-        tasks.put("description", "")
-        tasks.put("id", "")
+        tasks.put("name", task.name)
+        tasks.put("description", task.description)
         val db = this.writableDatabase
-        db.update("task", null, arrayOf(""))
+        db.update("task", tasks,"id", arrayOf(task.id))
         db.close()
     }
 
-    fun deletetask() {
-        val tasks = ContentValues()
-        tasks.put("id", "")
+    fun deletetask(task: Task) {
         val db = this.writableDatabase
-        db.delete("task", "id", arrayOf(""))
+        db.delete("task", "id", arrayOf(task.id))
         db.close()
     }
 
