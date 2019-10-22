@@ -54,14 +54,27 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         tasks.put("name", task.name)
         tasks.put("description", task.description)
         val db = this.writableDatabase
-        db.update("task", tasks,"id", arrayOf(task.id))
+        db.update("task", tasks,"id", arrayOf(task.id.toString()))
         db.close()
     }
+//
+//    fun deletetask(id: String) {
+//        val db = this.writableDatabase
+//        db.delete("task", "id", id)
+//        db.close()
+//    }
 
-    fun deletetask(task: Task) {
-        val db = this.writableDatabase
-        db.delete("task", "id", arrayOf(task.id))
-        db.close()
+    fun deletetask(id: String) {
+        val database = writableDatabase
+
+        val sql = "DELETE FROM task WHERE id=?"
+
+        val statement = database.compileStatement(sql)
+        statement.clearBindings()
+        statement.bindString(1, id)
+        statement.execute()
+        statement.close()
+        database.close()
     }
 
 
@@ -69,6 +82,11 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun readData(details:Details):Cursor{
         val db=this.readableDatabase
       return db.rawQuery("SELECT * FROM login WHERE email=? AND password=?", arrayOf(details.email,details.password))
+    }
+
+    fun getTask(): Cursor {
+        val db = this.readableDatabase
+        return db.rawQuery("select * from task", null)
     }
 
 }
