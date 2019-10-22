@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/cardViewTask"
     app:contentPadding="3dp"
     app:cardMaxElevation="5dp"
     app:cardCornerRadius="5dp">
@@ -39,12 +40,18 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/textViewDesc"
             android:layout_width="match_parent"
             android:textSize="18sp"
             android:textStyle="normal"
             android:textColor="@color/black"
             android:layout_height="wrap_content"
             android:text="TextView" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
